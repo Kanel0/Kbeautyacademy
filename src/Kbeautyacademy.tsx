@@ -1,4 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Logo1 from "./assets/Logo1.png";
+import Logo2 from "./assets/Logo2.png";
+import FemmeHero from "./assets/FemmeHero.png";
 
 const NAV_LINKS = ["Accueil", "Formations", "Boutique", "À propos", "Avis élèves", "Blog", "Contact"];
 
@@ -131,7 +134,7 @@ function AnimatedCounter({ target, suffix = "", duration = 1800 }: { target: num
     }, 16);
     return () => clearInterval(timer);
   }, [inView, target, duration]);
-  return <span ref={ref as React.Ref<HTMLSpanElement>}>{count.toLocaleString()}{suffix}</span>;
+  return <div ref={ref}><span>{count.toLocaleString()}{suffix}</span></div>;
 }
 
 function FadeIn({ children, delay = 0, direction = "up", className = "" }: { children: React.ReactNode; delay?: number; direction?: string; className?: string }) {
@@ -160,7 +163,7 @@ function FadeIn({ children, delay = 0, direction = "up", className = "" }: { chi
 }
 
 function ParallaxImage({ src, alt, style = {} }: { src: string; alt: string; style?: React.CSSProperties }) {
-  const ref = useRef<HTMLImageElement>(null);
+  const ref = useRef<HTMLImageElement | null>(null);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -310,12 +313,7 @@ export default function KBeautyAcademy() {
         transition: "all 0.35s cubic-bezier(0.22,1,0.36,1)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 36, height: 36, background: "#2a2a2a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#fff", fontWeight: 600, fontSize: 16, fontFamily: "serif" }}>K</span>
-          </div>
-          <div>
-            <div style={{ fontWeight: 600, fontSize: 13, letterSpacing: "0.15em", fontFamily: "'Jost', sans-serif", textTransform: "uppercase" }}>K Beauty</div>
-          </div>
+          <img src={Logo1} alt="K Beauty Academy" style={{ height: 40, width: "auto" }} />
         </div>
 
         <div className="hide-mobile" style={{ display: "flex", gap: 28 }}>
@@ -382,11 +380,12 @@ export default function KBeautyAcademy() {
           </FadeIn>
         </div>
 
+        {/* ── PHOTO HERO ── */}
         <div style={{ position: "relative", overflow: "hidden" }}>
           <ParallaxImage
-            src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900&q=90"
-            alt="Ongles réalisés par nos élèves"
-            style={{ width: "100%", height: "115%", objectFit: "cover", objectPosition: "center 30%", marginTop: "-7%" }}
+            src={FemmeHero}
+            alt="Experte ongulaire - K Beauty Academy"
+            style={{ width: "100%", height: "115%", objectFit: "cover", objectPosition: "center 20%", marginTop: "-7%" }}
           />
           {/* Stats flottantes */}
           <div style={{ position: "absolute", top: 32, right: 24, display: "flex", flexDirection: "column", gap: 10 }}>
@@ -610,10 +609,7 @@ export default function KBeautyAcademy() {
         <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1.4fr", gap: 44, marginBottom: 52, fontFamily: "'Jost', sans-serif" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
-              <div style={{ width: 36, height: 36, background: "#c9748a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ color: "#fff", fontWeight: 600, fontSize: 16, fontFamily: "serif" }}>K</span>
-              </div>
-              <div style={{ color: "#fff", fontWeight: 500, fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase" }}>K Beauty</div>
+              <img src={Logo2} alt="K Beauty Academy" style={{ height: 40, width: "auto" }} />
             </div>
             <p style={{ fontSize: 12, lineHeight: 1.8, color: "#666", maxWidth: 220 }}>La référence des formations beauté. Lancez-vous, nous vous guidons.</p>
             <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
